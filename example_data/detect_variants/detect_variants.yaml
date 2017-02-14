@@ -19,3 +19,9 @@ tumor_bam:
   class: File
   path: keep:f336a4e1c508de0aafac9d32e6175e72+3327/Final.bam
 strelka_exome_mode: true
+vep_cache_dir:
+  class: Directory
+  path: keep:6144a479df7a488c3e2e95a2d350fb43+549598
+synonyms_file:
+  class: File
+  path: keep:c44cc22f273354ce674b54ea81d9ce1b+70/chromAlias.ensembl.txt
