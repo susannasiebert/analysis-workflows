@@ -33,6 +33,10 @@ inputs:
     cosmic_vcf:
         type: File?
         secondaryFiles: [.tbi]
+    vep_cache_dir:
+        type: Directory
+    synonyms_file:
+        type: File?
 outputs:
     final_vcf:
         type: File
@@ -71,5 +75,7 @@ steps:
             strelka_exome_mode: strelka_exome_mode
             dbsnp_vcf: dbsnp
             cosmic_vcf: cosmic_vcf
+            vep_cache_dir: vep_cache_dir
+            synonyms_file: synonyms_file
         out:
             [final_vcf]
