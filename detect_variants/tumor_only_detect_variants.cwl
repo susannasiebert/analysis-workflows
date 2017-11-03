@@ -111,8 +111,8 @@ steps:
         run: add_bam_readcount_to_vcf.cwl
         in:
             vcf: annotate_variants/annotated_vcf
-            bam_readcount_tsvs: [bam_readcount/bam_readcount_tsv]
-            sample_names: [sample_name]
+            bam_readcount_tsvs: bam_readcount/bam_readcount_tsv
+            sample_names: sample_name
         out:
             [annotated_bam_readcount_vcf]
     bgzip:
