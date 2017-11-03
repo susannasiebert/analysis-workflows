@@ -107,10 +107,18 @@ steps:
             bam: cram_to_bam/bam
         out:
             [bam_readcount_tsv]
+    add_bam_readcount_to_vcf:
+        run: add_bam_readcount_to_vcf.cwl
+        in:
+            vcf: annotate_variants/annotated_vcf
+            bam_readcount_tsvs: [bam_readcount/bam_readcount_tsv]
+            sample_names: [sample_name]
+        out:
+            [annotated_bam_readcount_vcf]
     bgzip:
         run: bgzip.cwl
         in:
-            file: annotate_variants/annotated_vcf
+            file: add_bam_readcount_to_vcf/annotated_bam_readcount_vcf
         out:
             [bgzipped_file]
     index:
