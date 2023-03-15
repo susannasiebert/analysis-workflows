@@ -965,9 +965,12 @@ outputs:
     pvacseq_predictions:
         type: Directory
         outputSource: pvacseq/pvacseq_predictions
-    pvacfuse_predictions:
+    pvacfuse_agfusion_predictions:
         type: Directory
-        outputSource: pvacfuse/pvacfuse_predictions
+        outputSource: pvacfuse_agfusion/pvacfuse_predictions
+    pvacfuse_arriba_predictions:
+        type: Directory
+        outputSource: pvacfuse_arriba/pvacfuse_predictions
 
     unaligned_normal_dna_fastqc_data:
         type: File[]
@@ -1074,7 +1077,7 @@ steps:
             agfusion_annotate_noncanonical: agfusion_annotate_noncanonical
 
         out:
-            [final_bam, stringtie_transcript_gtf, stringtie_gene_expression_tsv, transcript_abundance_tsv, transcript_abundance_h5, gene_abundance, metrics, chart, fusion_evidence, bamcoverage_bigwig, cram, star_fusion_out, star_junction_out, star_fusion_log, star_fusion_predict, star_fusion_abridge, strand_info, annotated_fusion_predictions, coding_region_effects, fusioninspector_evidence]
+            [final_bam, stringtie_transcript_gtf, stringtie_gene_expression_tsv, transcript_abundance_tsv, transcript_abundance_h5, gene_abundance, metrics, chart, fusion_evidence, bamcoverage_bigwig, cram, star_fusion_out, star_junction_out, star_fusion_log, star_fusion_predict, star_fusion_abridge, arriba_fusion_predict, arriba_fusion_discard, strand_info, annotated_fusion_predictions, coding_region_effects, fusioninspector_evidence]
  
 
     somatic:
@@ -1294,10 +1297,41 @@ steps:
         out:
             [annotated_vcf, annotated_tsv, pvacseq_predictions]
 
-    pvacfuse:
+    pvacfuse_agfusion:
         run: ../tools/pvacfuse.cwl
         in:
             input_fusions: rnaseq/annotated_fusion_predictions
+            sample_name: tumor_sample_name
+            alleles: hla_consensus/consensus_alleles
+            prediction_algorithms: prediction_algorithms
+            epitope_lengths_class_i: epitope_lengths_class_i
+            epitope_lengths_class_ii: epitope_lengths_class_ii
+            binding_threshold: binding_threshold
+            percentile_threshold: percentile_threshold
+            iedb_retries: iedb_retries
+            keep_tmp_files: pvacfuse_keep_tmp_files
+            net_chop_method: net_chop_method
+            netmhc_stab: netmhc_stab
+            top_score_metric: top_score_metric
+            net_chop_threshold: net_chop_threshold
+            run_reference_proteome_similarity: run_reference_proteome_similarity
+            additional_report_columns: additional_report_columns
+            fasta_size: fasta_size
+            downstream_sequence_length: downstream_sequence_length
+            exclude_nas: exclude_nas
+            n_threads: pvacseq_threads
+            star_fusion_file: rnaseq/star_fusion_abridge
+            read_support: pvacfuse_read_support
+            expn_val: pvacfuse_expn_val
+            allele_specific_binding_thresholds: allele_specific_binding_thresholds
+            aggregate_inclusion_binding_threshold: aggregate_inclusion_binding_threshold
+            problematic_amino_acids: problematic_amino_acids
+        out:
+            [pvacfuse_predictions]
+    pvacfuse_arriba:
+        run: ../tools/pvacfuse.cwl
+        in:
+            input_fusions: rnaseq/arriba_fusion_predict
             sample_name: tumor_sample_name
             alleles: hla_consensus/consensus_alleles
             prediction_algorithms: prediction_algorithms

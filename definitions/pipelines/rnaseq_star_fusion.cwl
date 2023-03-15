@@ -111,6 +111,12 @@ outputs:
     star_fusion_abridge:
         type: File
         outputSource: star_fusion_detect/fusion_abridged
+    arriba_fusion_predict:
+        type: File
+        outputSource: arriba/fusion_predictions
+    arriba_fusion_discard:
+        type: File
+        outputSource: arriba/discarded_fusion_predictions
     stringtie_transcript_gtf:
         type: File
         outputSource: stringtie/transcript_gtf
@@ -213,6 +219,13 @@ steps:
                 linkMerge: merge_flattened
         out:
             [fusion_predictions,fusion_abridged, coding_region_effects, fusioninspector_evidence]
+    arriba:
+        run: ../tools/arriba.cwl
+        in:
+            reference_annotation: reference_annotation
+            reference: reference
+            aligned_bam: star_align_fusion/aligned_bam
+        out: [fusion_predictions, discarded_fusion_predictions]
     kallisto:
         run: ../tools/kallisto.cwl
         in:
