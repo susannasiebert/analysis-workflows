@@ -2,7 +2,7 @@
 class: CommandLineTool
 cwlVersion: v1.0
 label: "Call and annotate fusions with Arriba"
-baseCommand: ["/arriba_v2.4.0/run_arriba.sh"]
+baseCommand: ["/arriba_v2.4.0/arriba"]
 requirements:
     - class: ShellCommandRequirement
     - class: ResourceRequirement
