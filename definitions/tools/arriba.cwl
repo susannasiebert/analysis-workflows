@@ -21,7 +21,7 @@ arguments: [
 inputs:
     aligned_bam:
         type: File
-        inputBinding::wq
+        inputBinding:
             prefix: '-x'
     reference_annotation:
         type: File
