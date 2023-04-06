@@ -34,7 +34,7 @@ inputs:
         secondaryFiles: [.fai, ^.dict]
         inputBinding:
             prefix: '-a'
-out:
+outputs:
     fusion_predictions:
       type: File
       outputBinding:
