@@ -11,10 +11,10 @@ requirements:
     - class: DockerRequirement
       dockerPull: "uhrigs/arriba:2.4.0"
 arguments: [
-    "-b", "/arriba_v2.4.0/database/blacklist_hg38_GRCh38_v2.3.0.tsv.gz",
-    "-k", "/arriba_v2.4.0/database/known_fusions_hg38_GRCh38_v2.3.0.tsv.gz",
-    "-t", "/arriba_v2.4.0/database/known_fusions_hg38_GRCh38_v2.3.0.tsv.gz",
-    "-p", "/arriba_v2.4.0/database/protein_domains_hg38_GRCh38_v2.3.0.gff3",
+    "-b", "/arriba_v2.4.0/database/blacklist_hg38_GRCh38_v2.4.0.tsv.gz",
+    "-k", "/arriba_v2.4.0/database/known_fusions_hg38_GRCh38_v2.4.0.tsv.gz",
+    "-t", "/arriba_v2.4.0/database/known_fusions_hg38_GRCh38_v2.4.0.tsv.gz",
+    "-p", "/arriba_v2.4.0/database/protein_domains_hg38_GRCh38_v2.4.0.gff3",
     "-o", "arriba_fusions.tsv",
     "-O", "arriba_fusions.discarded.tsv"
 ]
